@@ -7,8 +7,11 @@
   function randomColors() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
+
+
 </script>
 <template>
+
   <div class="calculator-wrapper">
 
     <input type="text" class="display" readonly :value=displayStore.display>
@@ -32,18 +35,16 @@
          } else if (button == 'DEL') {
            displayStore.remove();
          } else if (button == 'ANS') {
-          /* displayStore.remove();
-           displayStore.calculate();*/
+           displayStore.remove();
+           displayStore.insert(logStore.getLastResult());
          } else if (button == '=') {
            let equation = displayStore.display;
            displayStore.calculate();
            let result = displayStore.display;
 
-           logStore.add(equation+' = '+result);
+           logStore.add(equation, result);
          } else {
-           // FIXME fix so that you cant write multiple commas after each other
            displayStore.insert(button);
-
          }
        }"
 

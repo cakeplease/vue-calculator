@@ -2,21 +2,22 @@ import {defineStore} from 'pinia';
 
 export const useLogStore = defineStore('log', () => {
     const log = [];
+    let lastResult = "";
 
     function clear() {
         this.log = [];
     }
 
-    function add(equation) {
-        if (isFinite(equation)) {
-            log.push(equation);
-
+    function add(equation, result) {
+        if (isFinite(result)) {
+            this.log.unshift(equation+" = "+result);
+            this.lastResult = result;
         }
     }
 
-    function getLastEquation() {
-        return this.log.slice(-1);
+    function getLastResult() {
+        return this.lastResult;
     }
 
-    return {log, clear, add, getLastEquation}
+    return {log, clear, add, getLastResult}
 })
