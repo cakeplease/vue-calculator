@@ -1,4 +1,28 @@
 @import './base.css';
+
+
+body * {
+    box-sizing: border-box;
+}
+.calculator-wrapper {
+    height: 80vh;
+}
+.calculator-wrapper .display {
+    height: 180px;
+    font-size: 62px;
+
+}
+
+.calculator-wrapper .button-wrapper {
+    height: calc(100% - 180px);
+}
+.log-wrapper {
+    height: 10vh;
+}
+.log-wrapper .log {
+    height: 100%;
+}
+
 /*
 
 #app {

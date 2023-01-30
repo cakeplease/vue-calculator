@@ -1,17 +1,20 @@
 <script setup>
   import {useDisplayStore} from "@/stores/display";
+  import {useLogStore} from "@/stores/log";
   const displayStore = useDisplayStore();
+  const logStore = useLogStore();
   let buttons = ['C','ANS','DEL','+', 1,2,3,'-',4,5,6,'*',7,8,9,'/',' ',0, ".",'='];
   function randomColors() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
 </script>
 <template>
-  <h1>Verdens beste kalkulator</h1>
   <div class="calculator-wrapper">
+
     <input type="text" class="display" readonly :value=displayStore.display>
     <div class="button-wrapper">
-      <button v-for="button in buttons" :value=button v-on:mouseover="(event) => {
+      <button v-for="button in buttons" :value=button
+       @:mouseover="(event) => {
         event.target.style.backgroundColor = randomColors();
       }"
        @:mouseleave="(event)=> {
@@ -24,8 +27,6 @@
         event.target.style.fontSize = '20px';
        }"
        @:click="()=> {
-         //let value = event.target.value;
-
          if (button == 'C') {
            displayStore.clear();
          } else if (button == 'DEL') {
@@ -34,10 +35,15 @@
           /* displayStore.remove();
            displayStore.calculate();*/
          } else if (button == '=') {
+           let equation = displayStore.display;
            displayStore.calculate();
-           document.getElementById('.log-wrapper').value = displayStore.display;
+           let result = displayStore.display;
+
+           logStore.add(equation+' = '+result);
          } else {
+           // FIXME fix so that you cant write multiple commas after each other
            displayStore.insert(button);
+
          }
        }"
 
@@ -48,7 +54,7 @@
   <div class="log-wrapper">
     <h3>Logg:</h3>
     <div class="log">
-
+      <p v-for="log in logStore.log">{{ log }}</p>
     </div>
   </div>
 </template>
