@@ -35,13 +35,12 @@
          } else if (button == 'DEL') {
            displayStore.remove();
          } else if (button == 'ANS') {
-           displayStore.remove();
+           displayStore.clear();
            displayStore.insert(logStore.getLastResult());
          } else if (button == '=') {
            let equation = displayStore.display;
            displayStore.calculate();
            let result = displayStore.display;
-
            logStore.add(equation, result);
          } else {
            displayStore.insert(button);

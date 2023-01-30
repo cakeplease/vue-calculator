@@ -29,6 +29,8 @@ export const useDisplayStore = defineStore('display', () => {
         } else {
             this.display += text;
         }
+
+
     }
     function clear() {
         this.display = "";
