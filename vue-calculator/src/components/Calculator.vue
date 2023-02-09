@@ -8,12 +8,9 @@
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
 
-
 </script>
 <template>
-
   <div class="calculator-wrapper">
-
     <input type="text" class="display" readonly :value=displayStore.display>
     <div class="button-wrapper">
       <button v-for="button in buttons" :value=button
